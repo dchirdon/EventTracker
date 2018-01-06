@@ -40,25 +40,17 @@ public class EventController {
 	
 	@RequestMapping(path = "distance", method = RequestMethod.POST)
 	public Activity create(@RequestBody String jsonDistance, HttpServletResponse res) {
-		res.setStatus(201);
-		
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			Activity distance = mapper.readValue(Activity.class, 1);
-			return activityDao.create(newActivity);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		return null;
+		Activity activity = activityDao.create(jsonDistance);
+		return activity;
 	}
 	
 	@RequestMapping(path = "distance/{id}", method = RequestMethod.PUT)
-	public Activity update(@PathVariable int id, HttpServletResponse response) {
+	public Activity update(@PathVariable int id, HttpServletResponse response, @RequestBody String jsonDistance) {
 		response.setStatus(202);
 		
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			Activity newActivity = mapper.readValue(Activity.class, 1);
+			Activity newActivity = mapper.readValue(jsonDistance, Activity.class);
 			return activityDao.update(id, newActivity);
 		} catch (Exception e) {
 			e.printStackTrace();

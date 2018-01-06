@@ -3,14 +3,14 @@ package data;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import src.entities.Activity;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import entities.Activity;
 
 @Repository
 @Transactional
@@ -18,42 +18,41 @@ public class ActivityDAOImpl implements ActivityDAO {
 
 	@PersistenceContext
 	private EntityManager em;
-	
-	@Override 
+
+	@Override
 	public List<Activity> index() {
-		String query = "select distinct distance from activity";
+		String query = "SELECT distinct a from Activity a";
+		List<Activity> activity = em.createQuery(query).getResultList();
+		return activity;
 	}
 
 	@Override
-	public Activity create(Activity activity) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("EventTracker");
-		EntityManager em = emf.createEntityManager();
-
-		em.persist(activity);
+	public Activity create(String jsonDistance) {
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try {
+			
+		Activity newActivity = mapper.readValue(jsonDistance, Activity.class);
+		em.persist(newActivity);
 		em.flush();
-
-		em.close();
-		emf.close();
-
-		return activity;
+		return newActivity;
+		} catch (Exception e) {
+			e.printStackTrace();
 	}
-
+		return null;
+	}
 	@Override
-	public Activity update(int id, Activity activity) { 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("EventTracker");
-		EntityManager em = emf.createEntityManager();
+	public Activity update(int id, Activity activity) {
 
-		Activity activity = em.find(Activity.class, id);
-		activity.setId(activity.getId());
-		activity.setName(activity.getName());
+		Activity distance = em.find(Activity.class, id);
+		distance.setId(activity.getId());
+		distance.setName(activity.getName());
 
-		return activity;
+		return distance;
 	}
 
 	@Override
 	public boolean destroy(int id) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("EventTracker");
-		EntityManager em = emf.createEntityManager();
 
 		Activity activity = em.find(Activity.class, id);
 		// em.getTransaction().begin();
@@ -66,10 +65,13 @@ public class ActivityDAOImpl implements ActivityDAO {
 			return true;
 		} else
 
-			em.close();
-		emf.close();
-		return false;
+			return false;
 
 	}
+
+	@Override
+	public Activity show(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
-	
