@@ -13,7 +13,7 @@
 <!-- <h1>EventTracker : <span class="activity-count-label"><em>{{vm.countActivities()}}</em></span></h1> -->
 
 <form ng-hide="vm.selected">
-    <input type="text" ng-model="activity.name" placeholder="New Activity" />
+    <input type="text" ng-model="activity.name" placeholder="Activity" />
     <input type="text" ng-model="activity.distance" placeholder="Distance" />
     <input type="text" ng-model="activity.time" placeholder="Time" />
     <input type="submit" value="Add Event" ng-click="vm.addActivity(activity); activity = {};" />
@@ -44,9 +44,9 @@
 </table>
 
 <div ng-show="vm.selected && !vm.editActivity">
-    <div>Event : {{vm.selected.id}}</div>
-    <div>Distance : {{vm.selected.name}}</div>
-    <div>Time : {{vm.selected.distance}}</div>
+    <div>Event : {{vm.selected.name}}</div>
+    <div>Distance : {{vm.selected.distance}}</div>
+    <div>Time : {{vm.selected.time}}</div>
     <button ng-click="vm.setEditActivity()">Edit</button>
     
     <button ng-click="vm.displayTable()">Go Back</button>
@@ -54,9 +54,9 @@
 
 
 <form ng-show="vm.editActivity">
-    Event : <input type="text" ng-model="vm.editActivity.name" placeholder="Task" /><br />
-    Distance : <input type="text" ng-model="vm.editActivity.distance" placeholder="Description" /><br />
-    Time : <input type="text" ng-model="vm.editActivity.time" /><br />
+    Event : <input type="text" ng-model="vm.editActivity.name" placeholder="Event" /><br />
+    Distance : <input type="text" ng-model="vm.editActivity.distance" placeholder="Distance" /><br />
+    Time : <input type="text" ng-model="vm.editActivity.time" placeholder="Time"/><br />
     <input type="submit" value="Cancel" ng-click="vm.editActivity = null" /><br />
     <input type="submit" value="Save" ng-click="vm.updateActivity(vm.editActivity)" />
 </form>

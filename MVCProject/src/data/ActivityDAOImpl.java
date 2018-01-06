@@ -46,8 +46,10 @@ public class ActivityDAOImpl implements ActivityDAO {
 	public Activity update(int id, Activity activity) {
 
 		Activity distance = em.find(Activity.class, id);
-		distance.setId(activity.getId());
+		//distance.setId(activity.getId());
 		distance.setName(activity.getName());
+		distance.setDistance(activity.getDistance());
+		distance.setTime(activity.getTime());
 
 		return distance;
 	}
