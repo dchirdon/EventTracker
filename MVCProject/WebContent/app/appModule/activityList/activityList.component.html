@@ -1,0 +1,60 @@
+<h1>{{'Hello EventTracker'}}</h1>
+
+<style>
+.todo-count-label {
+    background : green;
+    border-radius : 10px;
+    padding-left : 5px;
+    padding-right : 5px;
+    color : #fff;
+}
+</style>
+
+<h1>EventTracker : <span class="activity-count-label"><em>{{vm.countActivities()}}</em></span></h1>
+
+<form ng-hide="vm.selected">
+    <input type="text" ng-model="activity.name" placeholder="New Activity" />
+    <input type="submit" value="Add Event" ng-click="vm.addActivity(activity); activity = {};" />
+</form>
+
+<table ng-hide="vm.selected">
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Distance</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="activity in vm.activities">
+            <td ng-click="vm.displayActivity(activity)">{{activity.name}}</td>
+            <td ng-click="vm.displayActivity(activity)">{{activity.distance}}</td>
+            <td ng-click="vm.displayActivity(activity)">{{activity.time}}</td>
+            <!-- <td>
+                <input type="checkbox" ng-model="activity.completed" ng-change="vm.updateTodo(todo)" />
+            </td> -->
+        
+            <td>
+            <button class="red" ng-click="vm.deleteActivity(activity.id)">X</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div ng-show="vm.selected && !vm.editActivity">
+    <div>Event : {{vm.selected.id}}</div>
+    <div>Distance : {{vm.selected.name}}</div>
+    <div>Time : {{vm.selected.distance}}</div>
+    <button ng-click="vm.setEditActivity()">Edit</button>
+    
+    <button ng-click="vm.displayTable()">Go Back</button>
+</div>
+
+
+<form ng-show="vm.editActivity">
+    Event : <input type="text" ng-model="vm.editActivity.name" placeholder="Task" /><br />
+    Distance : <input type="text" ng-model="vm.editActivity.distance" placeholder="Description" /><br />
+    Time : <input type="text" ng-model="vm.editActivity.time" /><br />
+    <input type="submit" value="Cancel" ng-click="vm.editActivity = null" /><br />
+    <input type="submit" value="Save" ng-click="vm.updateActivity(vm.editActivity)" />
+</form>

@@ -29,18 +29,19 @@ public class ActivityDAOImpl implements ActivityDAO {
 	@Override
 	public Activity create(String jsonDistance) {
 		ObjectMapper mapper = new ObjectMapper();
-		
+
 		try {
-			
-		Activity newActivity = mapper.readValue(jsonDistance, Activity.class);
-		em.persist(newActivity);
-		em.flush();
-		return newActivity;
+
+			Activity newActivity = mapper.readValue(jsonDistance, Activity.class);
+			em.persist(newActivity);
+			em.flush();
+			return newActivity;
 		} catch (Exception e) {
 			e.printStackTrace();
-	}
+		}
 		return null;
 	}
+
 	@Override
 	public Activity update(int id, Activity activity) {
 
@@ -74,19 +75,3 @@ public class ActivityDAOImpl implements ActivityDAO {
 		return null;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
