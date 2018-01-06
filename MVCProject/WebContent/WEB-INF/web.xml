@@ -13,7 +13,7 @@
   	
   	<servlet-mapping>
     		<servlet-name>skeleton</servlet-name>
-    		<url-pattern>/api/*</url-pattern>
+    		<url-pattern>/rest/*</url-pattern>
   	</servlet-mapping>
   	
   	<error-page>

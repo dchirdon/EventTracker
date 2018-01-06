@@ -24,6 +24,7 @@ public class EventController {
 	
 	@RequestMapping(path = "/ping", method = RequestMethod.GET)
 	public String ping() {
+		System.out.println("pong");
 		return "pong";
 	}
 	
