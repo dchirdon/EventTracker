@@ -71,7 +71,6 @@ public class ActivityDAOImpl implements ActivityDAO {
 
 	@Override
 	public Activity show(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
