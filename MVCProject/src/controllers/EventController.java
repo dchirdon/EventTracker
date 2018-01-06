@@ -47,7 +47,6 @@ public class EventController {
 	
 	@RequestMapping(path = "distance/{id}", method = RequestMethod.PUT)
 	public Activity update(@PathVariable int id, HttpServletResponse response, @RequestBody String jsonDistance) {
-		response.setStatus(202);
 		
 		try {
 			ObjectMapper mapper = new ObjectMapper();
