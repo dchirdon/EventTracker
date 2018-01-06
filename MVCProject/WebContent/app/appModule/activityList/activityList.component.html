@@ -1,4 +1,4 @@
-<h1>{{'Hello EventTracker'}}</h1>
+<h1>{{'EventTracker'}}</h1>
 
 <style>
 .todo-count-label {
@@ -10,10 +10,12 @@
 }
 </style>
 
-<h1>EventTracker : <span class="activity-count-label"><em>{{vm.countActivities()}}</em></span></h1>
+<!-- <h1>EventTracker : <span class="activity-count-label"><em>{{vm.countActivities()}}</em></span></h1> -->
 
 <form ng-hide="vm.selected">
     <input type="text" ng-model="activity.name" placeholder="New Activity" />
+    <input type="text" ng-model="activity.distance" placeholder="Distance" />
+    <input type="text" ng-model="activity.time" placeholder="Time" />
     <input type="submit" value="Add Event" ng-click="vm.addActivity(activity); activity = {};" />
 </form>
 

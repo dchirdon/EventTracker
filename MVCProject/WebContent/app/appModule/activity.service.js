@@ -10,15 +10,15 @@ angular.module('appModule').factory('activityService', function($http) {
 		})
 	};
 
-	service.update = function(edittedActivity) {
+	service.update = function(editedActivity) {
 		return $http({
 
 			method : 'PUT',
-			url : 'rest/user/1/todo/' + edittedActivity.id,
+			url : 'rest/distance/' + editedActivity.id,
 			headers : {
 				'Content-Type' : 'application/json'
 			},
-			data : edittedActivity
+			data : editedActivity
 		})
 
 	}
@@ -28,7 +28,7 @@ angular.module('appModule').factory('activityService', function($http) {
 		return $http({
 
 			method : 'DELETE',
-			url : 'rest/distance/1/' + id
+			url : 'rest/distance/' + id
 		})
 
 	}
